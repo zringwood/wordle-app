@@ -1,0 +1,21 @@
+<!doctype html>
+<title>Automatic Wordle</title>
+<h1>Automatic Wordle</h1>
+<p>This is a system for solving Wordle puzzles automatically. You need the answer, so no cheating!</p><br>
+<p>Just input the answer below and the algorithm will determine the optimal guesses to solve it.</p> 
+<form method="POST">
+  <label for="puzzleanswer">Answer:</label><br>
+  <input type="text" id="puzzleanswer" name="puzzleanswer"value=""><br>
+  <input type="submit" value="Submit"></br>
+</form> 
+{% if output %}
+  <p>{{output[0]}}</p>
+  <p>{{output[1]}}</p>
+  <p>{{output[2]}}</p>
+  <p>{{output[3]}}</p>
+  <p>{{output[4]}}</p>
+  <p>{{output[5]}}</p>
+{% else %}
+  <p>Let's see if this works</p>
+{% endif %}
+</html>

@@ -12,7 +12,7 @@
                   "path": "Dockerfile"
               }
           },
-          "image": "WordleSolverApp",
+          "image": "wordlesolverapp",
           "service": {
               "name": "wordlesolverapp",
               "containerPort": 8080,

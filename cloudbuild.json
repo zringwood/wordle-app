@@ -1,0 +1,20 @@
+{
+  "steps": [
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "build",
+        "-t",
+        "gcr.io/$velvety-decoder-372206/my-image:latest",
+        "."
+      ]
+    },
+    {
+      "name": "gcr.io/cloud-builders/docker",
+      "args": [
+        "push",
+        "gcr.io/$velvety-decoder-372206/my-image:latest"
+      ]
+    }
+  ]
+}

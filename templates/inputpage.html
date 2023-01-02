@@ -5,6 +5,7 @@
 <p>Just input the answer below and the algorithm will determine the optimal guesses to solve it.</p> 
 <form method="POST">
   <div>{{form.answer.label}}:{{form.answer()}}</div>
+  <div>{{form.button}}</div>
 </form> 
 {% if output %}
   <p>{{output[0]}}</p>

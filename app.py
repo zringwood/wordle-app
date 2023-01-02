@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from wtforms import Form, StringField, validators
-import json
+import json, os
 from WordleGuessesGenerator import Puzzle
 app = Flask(__name__)
 

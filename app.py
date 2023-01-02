@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from wtforms import Form, StringField, SubmitField, validators
-import json
+import json, os
 from WordleGuessesGenerator import Puzzle
 app = Flask(__name__)
 
@@ -24,4 +24,6 @@ def processinput():
                 guesses[i] = nxt
     return render_template('inputpage.html', output=guesses, form=form)
 
-app.run()
+if __name__ == '__main__':
+    server_port = os.environ.get('PORT', '8080')
+    app.run(debug=False, port=server_port, host='0.0.0.0')

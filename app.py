@@ -1,13 +1,19 @@
 from flask import Flask, render_template, request
+from wtforms import Form, StringField, validators
+import json
 from WordleGuessesGenerator import Puzzle
 app = Flask(__name__)
 
-@app.route('/', methods = ['POST','GET'])
-def openpage():
+class WordleValidation(Form):
+    answer = StringField('Puzzle Answer',[validators.Length(min=5,max=5)])
+
+@app.route('/', methods = ['GET', 'POST'])
+def processinput():
     guesses = None
-    if request.method == 'POST':
-        text = request.form['puzzleanswer']
-        print(text)
+    form = WordleValidation(request.form)
+    if request.method == 'POST' and form.validate():
+        text = form.answer.data.lower()
+        
         puzzle = Puzzle(text)
         #You only get six guesses for wordle puzzles so this is all fixed. 
         guesses = ["","","","","",""]
@@ -15,6 +21,6 @@ def openpage():
             nxt = f"{puzzle.nextGuess()}"
             if guesses.count(nxt) == 0:
                 guesses[i] = nxt
-    return render_template('inputpage.html', output=guesses)
+    return render_template('inputpage.html', output=guesses, form=form)
 
 app.run()

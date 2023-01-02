@@ -4,9 +4,7 @@
 <p>This is a system for solving Wordle puzzles automatically. You need the answer, so no cheating!</p><br>
 <p>Just input the answer below and the algorithm will determine the optimal guesses to solve it.</p> 
 <form method="POST">
-  <label for="puzzleanswer">Answer:</label><br>
-  <input type="text" id="puzzleanswer" name="puzzleanswer"value=""><br>
-  <input type="submit" value="Submit"></br>
+  <div>{{form.answer.label}}:{{form.answer()}}</div>
 </form> 
 {% if output %}
   <p>{{output[0]}}</p>

@@ -1,26 +1,17 @@
-# Use the official lightweight Python image.
-# https://hub.docker.com/_/python
-FROM python:3.10.6-slim
+# Python image to use.
+FROM python:3.10-alpine
 
-# Allow statements and log messages to immediately appear in the Cloud Run logs
-ENV PYTHONUNBUFFERED 1
+# Set the working directory to /app
+WORKDIR /app
 
-# Create and change to the app directory.
-WORKDIR /usr/src/app
+# copy the requirements file used for dependencies
+COPY requirements.txt .
 
-# Copy application dependency manifests to the container image.
-# Copying this separately prevents re-running pip install on every code change.
-COPY requirements.txt ./
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Install dependencies.
-RUN pip install -r requirements.txt
+# Copy the rest of the working directory contents into the container at /app
+COPY . .
 
-# Copy local code to the container image.
-COPY . ./
-
-# Run the web service on container startup.
-# Use gunicorn webserver with one worker process and 8 threads.
-# For environments with multiple CPU cores, increase the number of workers
-# to be equal to the cores available.
-# Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app
+# Run app.py when the container launches
+ENTRYPOINT ["python", "app.py"]
